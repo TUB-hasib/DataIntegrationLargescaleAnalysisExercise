@@ -1,0 +1,59 @@
+Obtain the datasets mentioned above. The datasets are in text format. As a prerequisite for En-
+tity Resolution and model training, extract paper ID, paper title, author names, publication venue,
+and year of publication from the datasets. Collect all the publications published between 1995 to
+2004 in VLDB and SIGMOD venues. To filter the venues, check if the publication venue contains
+the strings “SIGMOD” or “VLDB” (case insensitive). Store the extracted entries in two CSV files,
+DBLP 1995 2004.csv and ACM 1995 2004.csv.
+Expected Results: Code for data preparation. The report should discuss the implementation
+details of converting the custom text format to CSV.
+
+#* --- paperTitle
+#@ --- Authors
+#t ---- Year
+#c  --- publication venue
+#index 00---- index id of this paper
+#% ---- the id of references of this paper (there are multiple lines, with each indicating a reference)
+#! --- Abstract
+
+********************************  citation-acm-v8.txt  *********************************************************
+#*INFORMS Journal on Computing
+#t2014
+#cINFORMS Journal on Computing
+#index558ac6e0612c41e6b9d39eed
+
+#*Pushout-complements and basic concepts of grammars in toposes
+#@Yasuo Kawahara
+#t1990
+#cTheoretical Computer Science
+#index5390879920f70186a0d422b8
+
+#*Effective constructors the formal series of trees (French)
+#@Symeon Bozapalidis
+#t1990
+#cTheoretical Computer Science
+#index5390879920f70186a0d422b6
+
+************************************  dblp.txt  ***************************************************************
+#*Protein Kinase C, Models of.
+#@Kim L. Blackwell
+#t2014
+#cEncyclopedia of Computational Neuroscience
+#index55503da645ce0a409eb273e8
+
+#*Stimulus Reconstruction from Cortical Responses.
+#@Nima Mesgarani
+#t2014
+#cEncyclopedia of Computational Neuroscience
+#index55503da645ce0a409eb273e9
+
+#*Neuromuscular Control Systems, Models of.
+#@James J. Abbas
+#t2014
+#cEncyclopedia of Computational Neuroscience
+#index55503da645ce0a409eb273ea
+
+#*Spinal Interfaces: Overview.
+#@Michel Lemay
+#t2014
+#cEncyclopedia of Computational Neuroscience
+#index55503da645ce0a409eb273eb

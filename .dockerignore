@@ -1,0 +1,32 @@
+# Ignore compiled Python files
+*.pyc
+
+# Ignore temporary files
+*.swp
+*~
+
+# Ignore Docker specific files
+.dockerignore
+Dockerfile
+
+# Ignore local development files
+__pycache__
+venv/
+
+#ignore data folder files
+data/# Ignore compiled Python files
+*.pyc
+
+# Ignore temporary files
+*.swp
+*~
+
+# Ignore Docker specific files
+.dockerignore
+Dockerfile
+
+# Ignore local development files
+__pycache__
+venv/
+data/ACM_1995_2004.csv
+data/DBLP_1995_2004.csv

@@ -1,0 +1,17 @@
+# Virtual Environment
+venv/
+
+# Compiled Python files
+__pycache__/
+*.pyc
+
+# Local development settings
+.env
+
+# Editor-specific files
+.vscode/
+*.swp
+
+# Other specific files/directories based on your needs
+data/ACM_1995_2004.csv
+data/DBLP_1995_2004.csv
