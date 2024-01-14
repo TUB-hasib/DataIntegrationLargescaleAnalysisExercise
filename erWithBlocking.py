@@ -1,8 +1,8 @@
 import pandas as pd
 from pprint import pprint
-from sklearn.metrics import jaccard_score
 from nltk.metrics import jaccard_distance
 
+threshold = .70
 
 
 # Data Integration and Machine Learning: A Natural Synergy
@@ -24,7 +24,6 @@ def createBlockingWithYearAndVenue(bucketDict:dict,df:pd.DataFrame)-> dict:
 
 # calculting similarity value for matching stage. 
 def calculateSimilarity(acmItem:dict, dblpItem:dict, threshold:float)-> float|None:
-
     set1 = set(str(acmItem['publicationTitle']).lower().split())
     set2 = set(str(dblpItem['publicationTitle']).lower().split())
     # Calculate Jaccard similarity using similaritymeasures
@@ -32,9 +31,9 @@ def calculateSimilarity(acmItem:dict, dblpItem:dict, threshold:float)-> float|No
     jaccard_similarity = 1.0 - jaccard_distance(set1,set2)
 
     if(jaccard_similarity >= threshold):
-        # print(f'publicationTitle Acm :  {set1}')
-        # print(f'publicationTitle Dblp:  {set2}')
-        # print(f"Jaccard Similarity: {jaccard_similarity}")
+        print(f'publicationTitle Acm :  {set1}')
+        print(f'publicationTitle Dblp:  {set2}')
+        print(f"Jaccard Similarity: {jaccard_similarity}")
         return jaccard_similarity
     return None
 
@@ -65,7 +64,6 @@ def er():
     bucketDictDblp = createBlockingWithYearAndVenue(bucketDictDblp, dfDBLP)
 
     # pprint(bucketDictAcm) 
-    print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFfffffffffffffffffffffffffffffFF")
     # pprint(bucketDictDblp)
 
 
@@ -73,7 +71,8 @@ def er():
 
     acmKeys = list(bucketDictAcm.keys())
     dblpKeys = list(bucketDictDblp.keys())
-    threshold = .80
+    # threshold = .50      # no need as threshhold is declared at top 
+    allPairsMatches = []
 
     for key in acmKeys:
         if key in dblpKeys:  # if the key of acm also exist in dbpl(ie in the same bucket)
@@ -83,9 +82,20 @@ def er():
                 for dblpItem in bucketDictDblp[key]: 
                     similarityValue = calculateSimilarity(acmItem, dblpItem, threshold)
                     if similarityValue:
-                        print(acmItem)
-                        print(dblpItem)
-                        print(f"Jaccard Similarity: {similarityValue}")
+                        # print(f'acm: {acmItem}')
+                        # print(f'{dblp: dblpItem}')
+                        # print(f"Jaccard Similarity: {similarityValue}")
+                        match = {'acm':acmItem, 'dblp':dblpItem, 'similarityScore':similarityValue}
+                        allPairsMatches.append(match)
+                        # break  
+                        # we can use break to break from current dblp loop.  if acm and dblp already has a value which matches may be we dont need to continue dblp anymore. 
+                        # if the threshold is low may be it just get the first match. 
+
+        
+    df = pd.DataFrame(allPairsMatches)
+    df.to_csv('data/Matched Entities.csv', index=False)
+    print(df)
+        
 
 
 
