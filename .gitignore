@@ -13,5 +13,5 @@ __pycache__/
 *.swp
 
 # Other specific files/directories based on your needs
-data/ACM_1995_2004.csv
-data/DBLP_1995_2004.csv
+# data/ACM_1995_2004.csv
+# data/DBLP_1995_2004.csv
