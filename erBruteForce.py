@@ -2,8 +2,7 @@ import pandas as pd
 from pprint import pprint
 from nltk.metrics import jaccard_distance
 from erWithBlocking import calculateSimilarity, threshold  # same threshhold as  erWithBlocking. doing it to not change twice  
-
-
+import time
 
 def er():
 
@@ -19,6 +18,7 @@ def er():
     dfACM = pd.read_csv(urlACM)
     dfDBLP = pd.read_csv(urlDBLP)
 
+    startTime = time.time()
     #********************************* MATCHING STAGE  *********************************
     allPairsMatches = []
     for indexAcm, recordAcm in dfACM.iterrows():
@@ -32,13 +32,18 @@ def er():
                 # print(f'acm: {acmItem}')
                 # print(f'{dblp: dblpItem}')
                 # print(f"Jaccard Similarity: {similarityValue}")
-                match = {'acm':acmItem, 'dblp':dblpItem, 'similarityScore':similarityValue}
+                recordId = acmItem['publicationID'] + dblpItem['publicationID']
+                match = {'recordId':recordId, 'acm':acmItem, 'dblp':dblpItem, 'similarityScore':similarityValue}
                 allPairsMatches.append(match)
                 # break  # if acm and dblp already has a value which matches, no need to continue current dblp inner loop
 
     df = pd.DataFrame(allPairsMatches)
     df.to_csv('data/Matched Entities with Brute Force.csv', index=False)
     print(df)
+
+    endTime =  time.time()
+    executionTime = endTime - startTime
+    print(f"executionTime: {executionTime} sec")
 
 
 

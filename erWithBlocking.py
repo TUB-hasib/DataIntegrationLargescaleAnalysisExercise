@@ -1,6 +1,7 @@
 import pandas as pd
 from pprint import pprint
 from nltk.metrics import jaccard_distance
+import time
 
 threshold = .70
 
@@ -51,6 +52,7 @@ def er():
     dfACM = pd.read_csv(urlACM)
     dfDBLP = pd.read_csv(urlDBLP)
 
+    startTime = time.time()
     #********************************* BLOCKING STAGE  *********************************
     # creating bucket for blocking stage
     # bucketDict:dict ={}
@@ -85,7 +87,8 @@ def er():
                         # print(f'acm: {acmItem}')
                         # print(f'{dblp: dblpItem}')
                         # print(f"Jaccard Similarity: {similarityValue}")
-                        match = {'acm':acmItem, 'dblp':dblpItem, 'similarityScore':similarityValue}
+                        recordId = acmItem['publicationID'] + dblpItem['publicationID']
+                        match = {'recordId':recordId ,'acm':acmItem, 'dblp':dblpItem, 'similarityScore':similarityValue}
                         allPairsMatches.append(match)
                         # break  
                         # we can use break to break from current dblp loop.  if acm and dblp already has a value which matches may be we dont need to continue dblp anymore. 
@@ -95,6 +98,13 @@ def er():
     df = pd.DataFrame(allPairsMatches)
     df.to_csv('data/Matched Entities.csv', index=False)
     print(df)
+
+    endTime = time.time()
+
+    executionTime = endTime - startTime
+    print(f"executionTime: {executionTime} sec")
+    
+
         
 
 
