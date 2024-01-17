@@ -1,11 +1,52 @@
-Obtain the datasets mentioned above. The datasets are in text format. As a prerequisite for En-
-tity Resolution and model training, extract paper ID, paper title, author names, publication venue,
-and year of publication from the datasets. Collect all the publications published between 1995 to
-2004 in VLDB and SIGMOD venues. To filter the venues, check if the publication venue contains
-the strings “SIGMOD” or “VLDB” (case insensitive). Store the extracted entries in two CSV files,
-DBLP 1995 2004.csv and ACM 1995 2004.csv.
-Expected Results: Code for data preparation. The report should discuss the implementation
-details of converting the custom text format to CSV.
+                                              recordId  ... similarityScore
+43    5390972920f70186a0dfacf953e9bc96b7602d970491374f  ...        0.857143
+86    5390975920f70186a0dfe09553e9afcdb7602d9703a21cb7  ...        0.750000
+156   53909f6920f70186a0e3a97853e9b46fb7602d9703f6e2e2  ...        0.777778
+215   53909f8c20f70186a0e3fe6253e9afcdb7602d9703a21cb7  ...        0.750000
+276   53909f8c20f70186a0e401fc53e9bc96b7602d970491374f  ...        0.857143
+614   5390882d20f70186a0d8daf153e9be4ab7602d9704b05415  ...        0.800000
+616   5390882d20f70186a0d8daf253e9be4ab7602d9704b05415  ...        0.800000
+697   53908a4020f70186a0d9d84e53e9af33b7602d970396e8cc  ...        0.777778
+1246  5390958a20f70186a0def8df53e9b46fb7602d9703f6e2e2  ...        0.777778
+
+[9 rows x 4 columns]
+                                             recordId  ... similarityScore
+672  5390882d20f70186a0d8daf153e9be4ab7602d9704b05415  ...             0.8
+674  5390882d20f70186a0d8daf253e9be4ab7602d9704b05415  ...             0.8
+
+[2 rows x 4 columns]
+                                              recordId  ... similarityScore_y
+43    5390972920f70186a0dfacf953e9bc96b7602d970491374f  ...          0.857143
+86    5390975920f70186a0dfe09553e9afcdb7602d9703a21cb7  ...          0.750000
+155   53909f6920f70186a0e3a97853e9b46fb7602d9703f6e2e2  ...          0.777778
+214   53909f8c20f70186a0e3fe6253e9afcdb7602d9703a21cb7  ...          0.750000
+275   53909f8c20f70186a0e401fc53e9bc96b7602d970491374f  ...          0.857143
+609   5390882d20f70186a0d8daf153e9be4ab7602d9704b05415  ...          0.800000
+610   5390882d20f70186a0d8daf153e9be4ab7602d9704b05415  ...          0.800000
+611   5390882d20f70186a0d8daf153e9be4ab7602d9704b05415  ...          0.800000
+613   5390882d20f70186a0d8daf253e9be4ab7602d9704b05415  ...          0.800000
+614   5390882d20f70186a0d8daf253e9be4ab7602d9704b05415  ...          0.800000
+615   5390882d20f70186a0d8daf253e9be4ab7602d9704b05415  ...          0.800000
+696   53908a4020f70186a0d9d84e53e9af33b7602d970396e8cc  ...          0.777778
+1233  5390958a20f70186a0def8df53e9b46fb7602d9703f6e2e2  ...          0.777778
+
+[13 rows x 7 columns]
+
+
+
+
+blocking : hash on year and venue
+similaritymethod : jaccard_distance
+threshold: .70
+time : 2.26 sec
+amount of records: 1265
+
+blocking : hash on year and venue
+similaritymethod : jaccard_distance
+threshold: .70
+time : 660 sec
+amount of records: 1289
+
 
 #* --- paperTitle
 #@ --- Authors
