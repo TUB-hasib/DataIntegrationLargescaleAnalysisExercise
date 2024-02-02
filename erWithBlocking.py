@@ -1,6 +1,8 @@
 import pandas as pd
 from pprint import pprint
 from nltk.metrics import jaccard_distance
+import networkx 
+
 import time
 
 threshold = .70
@@ -95,20 +97,33 @@ def er():
                         # if the threshold is low may be it just get the first match. 
 
         
-    df = pd.DataFrame(allPairsMatches)
-    df.to_csv('data/Matched Entities.csv', index=False)
-    print(df)
+    dfMatchedEnities = pd.DataFrame(allPairsMatches)
+    dfMatchedEnities.to_csv('data/Matched Entities.csv', index=False)
+    print(dfMatchedEnities)
 
     endTime = time.time()
 
     executionTime = endTime - startTime
     print(f"executionTime: {executionTime} sec")
+
+
+
+    #********************************* CLUSTERING STAGE  *********************************
+
+    dfClustering =dfMatchedEnities[['recordId']] # just need the recordID as the key from acm and dblp are already here
+    dfClustering[['ACM', 'DBLP']] = dfClustering['recordId'].apply(lambda x: pd.Series([x[:24], x[24:]])) # each id size is 24. creating 2 col(acm and dblp id) by dividig the recordID
+    edgeList = list(zip(dfClustering['ACM'], dfClustering['DBLP'])) # putting them in a list to calculate connected component. 
+
+    # graph creation
+    graph = networkx.Graph()
+    graph.add_edges_from(edgeList)
+    # Finding connected components from the graph
+    components = list(networkx.connected_components(graph))
+    print("connected component list: ")
+    for component in components:
+        print(component)
+        print(type(component))
     
-
-        
-
-
-
 
 
 
